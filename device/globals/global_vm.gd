@@ -475,6 +475,7 @@ func get_object(name):
 	return objects[name]
 
 func register_object(name, val):
+	
 	if !name:
 		report_errors("register_object", ["global_id not given for " + val.get_class() + " " + val.name])
 
@@ -673,6 +674,7 @@ func load_file(p_game):
 	game = compile(p_game)
 
 func run_game():
+	
 	# `load` and `ready` are exclusive because you probably don't want to
 	# reset the game state when a scene becomes ready, and `ready` is
 	# redundant when `load`ing state anyway.

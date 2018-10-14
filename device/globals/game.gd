@@ -99,7 +99,7 @@ func mouse_enter(obj):
 		set_overlapped_obj(obj)
 
 	var text
-	var tt = obj.get_tooltip()
+	var tt = obj.get_meta("component").get_tooltip()
 
 	# XXX: The warning report may be removed if it turns out to be too annoying in practice
 	if not tt:
@@ -120,7 +120,7 @@ func mouse_enter(obj):
 
 	# We must hide all non-inventory tooltips and interactions when the inventory is open
 	if inventory and inventory.blocks_tooltip():
-		if obj is esc_type.ITEM and obj.inventory:
+		if obj.get_meta("component") is esc_type.COMPONENT and obj.inventory:
 			if !current_action:
 				text = tr(tt)
 			else:
@@ -132,7 +132,7 @@ func mouse_enter(obj):
 			get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFAULT, "hud", "set_tooltip", text)
 			vm.hover_begin(obj)
 	else:
-		if obj is esc_type.ITEM:
+		if obj.get_meta("component") is esc_type.COMPONENT:
 			if current_action != "" and current_tool != null:
 				if tt:
 					text = tr(current_action + ".combine_id")
@@ -211,7 +211,7 @@ func clicked(obj, pos, input_event = null):
 		return
 
 	var walk_context = null
-	var obj_action = obj.get_action()
+	var obj_action = obj.get_meta("component").get_action()
 	var action = ""
 
 	# Before setting action, see if the object or the project
@@ -377,7 +377,7 @@ func activate(obj, action, param = null):
 		#print_stack()
 		return
 
-	if !obj.activate(action, param):
+	if !obj.get_meta("component").activate(action, param):
 		if param != null: # try opposite way
 			if param.activate(action, obj):
 				return

@@ -174,9 +174,9 @@ func interact(p_params):
 	# It's safe to assume false, because it most likely gets reset
 	# or we pass control over to fallbacks in game.interact()
 	var do_walk = false
-	if action in obj.event_table:
-		var ev_flags = obj.event_table[action]["ev_flags"]
-
+	if action in obj.get_meta("component").event_table:
+		var ev_flags = obj.get_meta("component").event_table[action]["ev_flags"]
+		
 		if not "TK" in ev_flags:
 			do_walk = true
 
@@ -186,12 +186,12 @@ func interact(p_params):
 			else:
 				walk_context["fast"] = true
 				do_walk = true
-
 	if (not telekinetic and do_walk) and get_global_position().distance_to(pos) > 10:
 		# It's important to set the queue before walking, so it
 		# is in effect until walk_stop() has to reset the queue.
 		params_queue = p_params
 		walk_to(pos, walk_context)
+		
 	else:
 		if animations.dir_angles.size() > 0 and obj.interact_angle != -1:
 			last_dir = vm._get_dir_deg(obj.interact_angle, self.name, animations)

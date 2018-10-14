@@ -359,6 +359,9 @@ func setup_ui_anim():
 	vm.connect("global_changed", self, "global_changed")
 
 func _ready():
+	add_child(component)
+	component.init()
+	
 	add_to_group("item")
 
 	if Engine.is_editor_hint():

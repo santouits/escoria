@@ -1,6 +1,7 @@
 extends Sprite
 
-var component = load("res://custom_nodes/component.gd").new()
+onready var component = preload("res://globals/component.gd").new()
+
 export var tooltip = ""
 export(String, FILE, ".esc") var events_path = ""
 export var global_id = ""

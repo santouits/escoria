@@ -1,23 +1,26 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://globals/scene.gd" type="Script" id=1]
 [ext_resource path="res://demo/rooms/test/background.png" type="Texture" id=2]
-[ext_resource path="res://globals/background.gd" type="Script" id=3]
+[ext_resource path="res://addons/escoria/escoria_background.gd" type="Script" id=3]
 [ext_resource path="res://globals/terrain.gd" type="Script" id=4]
 [ext_resource path="res://demo/rooms/test/scales.png" type="Texture" id=5]
 [ext_resource path="res://demo/rooms/test/lightmap.png" type="Texture" id=6]
 [ext_resource path="res://demo/actors/player/player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://globals/exit.gd" type="Script" id=8]
-[ext_resource path="res://globals/trigger.gd" type="Script" id=9]
-[ext_resource path="res://demo/rooms/test/ice_cream.tscn" type="PackedScene" id=10]
-[ext_resource path="res://demo/rooms/test/box.tscn" type="PackedScene" id=11]
-[ext_resource path="res://demo/rooms/test/can.tscn" type="PackedScene" id=12]
-[ext_resource path="res://demo/rooms/test/can_anims.gd" type="Script" id=13]
-[ext_resource path="res://globals/target.gd" type="Script" id=14]
-[ext_resource path="res://demo/rooms/test/chain_saw.tscn" type="PackedScene" id=15]
-[ext_resource path="res://demo/rooms/test/floppy.tscn" type="PackedScene" id=16]
-[ext_resource path="res://globals/game.tscn" type="PackedScene" id=17]
-[ext_resource path="res://demo/ui/rmb_hints.gd" type="Script" id=18]
+[ext_resource path="res://addons/escoria/escoria_area2d.gd" type="Script" id=9]
+[ext_resource path="res://addons/escoria/icon_godot_docs.svg" type="Texture" id=10]
+[ext_resource path="res://demo/rooms/test/ice_cream.tscn" type="PackedScene" id=11]
+[ext_resource path="res://demo/rooms/test/box.tscn" type="PackedScene" id=12]
+[ext_resource path="res://demo/rooms/test/can.tscn" type="PackedScene" id=13]
+[ext_resource path="res://demo/rooms/test/can_anims.gd" type="Script" id=14]
+[ext_resource path="res://globals/target.gd" type="Script" id=15]
+[ext_resource path="res://demo/rooms/test/chain_saw.tscn" type="PackedScene" id=16]
+[ext_resource path="res://demo/rooms/test/floppy.tscn" type="PackedScene" id=17]
+[ext_resource path="res://globals/game.tscn" type="PackedScene" id=18]
+[ext_resource path="res://demo/ui/rmb_hints.gd" type="Script" id=19]
+[ext_resource path="res://demo/actors/player/idle_right_hat.png" type="Texture" id=20]
+[ext_resource path="res://addons/escoria/escoria_texture_rect.gd" type="Script" id=21]
 
 [sub_resource type="NavigationPolygon" id=1]
 
@@ -40,7 +43,7 @@ width = 2048
 
 render_priority = 0
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 
 resource_name = "face_down"
 length = 1.0
@@ -71,7 +74,7 @@ tracks/1/keys = {
 "values": [ Vector2( 481, 404 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=6]
 
 resource_name = "face_left"
 length = 1.0
@@ -102,9 +105,8 @@ tracks/1/keys = {
 "values": [ 270.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 
-resource_name = "face_right"
 length = 1.0
 loop = false
 step = 0.1
@@ -133,9 +135,8 @@ tracks/1/keys = {
 "values": [ Vector2( 501, 374 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 
-resource_name = "face_up"
 length = 1.0
 loop = false
 step = 0.1
@@ -177,10 +178,30 @@ events_path = ""
 texture = ExtResource( 2 )
 centered = false
 script = ExtResource( 3 )
+tooltip = ""
+events_path = ""
+global_id = "bg"
+use_combine = false
+inventory = false
+use_action_menu = true
+interact_angle = -1
+interact_position = null
+dialog_color = null
+talk_animation = "talk"
+active = true
+placeholders = {
+
+}
+dynamic_z_index = true
+speed = 300
+scale_on_map = false
+light_on_map = false
+animations = null
 action = "walk"
 
 [node name="terrain" type="Navigation2D" parent="." index="1"]
 
+editor/display_folded = true
 position = Vector2( -65.0709, 373.302 )
 script = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Z" ]
@@ -202,6 +223,7 @@ enabled = true
 
 [node name="player" parent="." index="2" instance=ExtResource( 7 )]
 
+modulate = Color( 1, 0, 1, 1 )
 position = Vector2( 742.426, 415.054 )
 z_index = 415
 _sections_unfolded = [ "Transform" ]
@@ -234,9 +256,22 @@ animations = null
 speed = 300
 scale_on_map = false
 light_on_map = false
+tooltip = "First exit"
+action = ""
 events_path = "res://demo/rooms/test/exit1.esc"
 global_id = "first_exit"
-tooltip = "First exit"
+use_combine = false
+inventory = false
+use_action_menu = true
+interact_angle = -1
+interact_position = null
+dialog_color = null
+talk_animation = "talk"
+active = true
+placeholders = {
+
+}
+dynamic_z_index = true
 
 [node name="trigger1" type="Area2D" parent="." index="4"]
 
@@ -249,13 +284,30 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 9 )
 _sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_editor_icon": ExtResource( 10 )
+}
+activation_on = 1
 animations = null
 speed = 300
 scale_on_map = false
 light_on_map = false
+tooltip = "First trigger"
+action = ""
 events_path = "res://demo/rooms/test/hotspot1.esc"
 global_id = "first_trigger"
-tooltip = "First trigger"
+use_combine = false
+inventory = false
+use_action_menu = true
+interact_angle = -1
+interact_position = null
+dialog_color = null
+talk_animation = "talk"
+active = true
+placeholders = {
+
+}
+dynamic_z_index = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="trigger1" index="0"]
 
@@ -278,9 +330,22 @@ animations = null
 speed = 300
 scale_on_map = false
 light_on_map = false
+tooltip = "Second exit"
+action = ""
 events_path = "res://demo/rooms/test/exit2.esc"
 global_id = "second_exit"
-tooltip = "Second exit"
+use_combine = false
+inventory = false
+use_action_menu = true
+interact_angle = -1
+interact_position = null
+dialog_color = null
+talk_animation = "talk"
+active = true
+placeholders = {
+
+}
+dynamic_z_index = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="exit2" index="0"]
 
@@ -289,55 +354,38 @@ build_mode = 0
 polygon = PoolVector2Array( 372.508, 392.173, 296.246, 442.437, 373.375, 476.235, 426.239, 420.771, 426.239, 360.108, 377.708, 386.973 )
 _sections_unfolded = [ "Material" ]
 
-[node name="ice_cream" parent="." index="6" instance=ExtResource( 10 )]
+[node name="ice_cream" parent="." index="6" instance=ExtResource( 11 )]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+editor/display_folded = true
 margin_left = 225.0
 margin_top = 343.0
 margin_right = 313.0
 margin_bottom = 461.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-interact_position = null
-dialog_color = null
-use_custom_z = false
+activation_on = 0
 
 [node name="interact_pos" type="Position2D" parent="ice_cream" index="0"]
 
 position = Vector2( -5.05936, 96.9224 )
 
-[node name="box" parent="." index="7" instance=ExtResource( 11 )]
+[node name="box" parent="." index="7" instance=ExtResource( 12 )]
 
+editor/display_folded = true
 position = Vector2( 945.535, 381.07 )
 
 [node name="interact_pos" type="Position2D" parent="box" index="3"]
 
 position = Vector2( -53.8209, 46.6584 )
 
-[node name="can" parent="." index="8" instance=ExtResource( 12 )]
+[node name="can" parent="." index="8" instance=ExtResource( 13 )]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+editor/display_folded = true
 margin_left = 461.0
 margin_top = 364.0
 margin_right = 481.0
 margin_bottom = 404.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-animations = ExtResource( 13 )
+activation_on = 0
+animations = ExtResource( 14 )
 action = ""
-interact_position = null
-dialog_color = null
-use_custom_z = false
 
 [node name="animation" type="AnimationPlayer" parent="can" index="0"]
 
@@ -346,10 +394,10 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/face_down = SubResource( 7 )
-anims/face_left = SubResource( 8 )
-anims/face_right = SubResource( 5 )
-anims/face_up = SubResource( 6 )
+anims/face_down = SubResource( 5 )
+anims/face_left = SubResource( 6 )
+anims/face_right = SubResource( 7 )
+anims/face_up = SubResource( 8 )
 blend_times = [  ]
 
 [node name="interact_pos" type="Position2D" parent="can" index="1"]
@@ -359,35 +407,26 @@ position = Vector2( 57.6177, 60.9417 )
 [node name="can_destination" type="Position2D" parent="." index="9"]
 
 position = Vector2( 572.187, 451.251 )
-script = ExtResource( 14 )
+script = ExtResource( 15 )
 global_id = "can_destination"
 
-[node name="chainsaw" parent="." index="10" instance=ExtResource( 15 )]
+[node name="chainsaw" parent="." index="10" instance=ExtResource( 16 )]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+editor/display_folded = true
 margin_left = 1088.0
 margin_top = 340.0
 margin_right = 1227.0
 margin_bottom = 435.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-interact_position = null
-dialog_color = null
-use_custom_z = false
+activation_on = 0
 
 [node name="interact_pos" type="Position2D" parent="chainsaw" index="0"]
 
 position = Vector2( 7.19824, 124.934 )
 
-[node name="floppy" parent="." index="11" instance=ExtResource( 16 )]
+[node name="floppy" parent="." index="11" instance=ExtResource( 17 )]
 
+editor/display_folded = true
 position = Vector2( 67.0833, 388.125 )
-interact_position = null
 placeholders = {
 
 }
@@ -397,15 +436,54 @@ placeholders = {
 position = Vector2( 73.3036, 34.9703 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="game" parent="." index="12" instance=ExtResource( 17 )]
+[node name="game" parent="." index="12" instance=ExtResource( 18 )]
 
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
+editor/display_folded = true
 
 [node name="rmb_script" type="Node" parent="game" index="4"]
 
-script = ExtResource( 18 )
+script = ExtResource( 19 )
+
+[node name="EscoriaTextureRect" type="TextureRect" parent="." index="13"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 20 )
+stretch_mode = 0
+script = ExtResource( 21 )
+__meta__ = {
+"_editor_icon": ExtResource( 10 )
+}
+activation_on = 0
+animations = null
+speed = 300
+scale_on_map = false
+light_on_map = false
+tooltip = ""
+action = ""
+events_path = ""
+global_id = "adf"
+use_combine = false
+inventory = false
+use_action_menu = true
+interact_angle = -1
+interact_position = null
+dialog_color = null
+talk_animation = "talk"
+active = true
+placeholders = {
+
+}
+dynamic_z_index = true
 
 

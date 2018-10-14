@@ -1,10 +1,6 @@
-extends "res://globals/interactive.gd"
+extends "res://globals/item.gd"
 
-export(String, FILE, ".esc") var events_path
-export var global_id = ""
-export var tooltip = ""
-
-var event_table = {}
+# trigger.gd
 
 func get_tooltip():
 	if TranslationServer.get_locale() == ProjectSettings.get_setting("escoria/platform/development_lang"):

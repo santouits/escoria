@@ -75,6 +75,33 @@ func menu_collapse():
 func set_current_scene(p_scene, events_path=null, run_events=true):
 	#print_stack()
 	current = p_scene
+	
+	print_stack()
+#	print(current.aaaaaaa)
+	var scene_children = current.get_children()
+	print("AAAAAAAAAAAAAAAAAA")
+	
+	print(current.name)
+	for node in scene_children:
+
+		if node is Navigation2D or node.name == "game" or node.name == "player":
+			print(node.name)
+			continue
+		if not node.has_meta("component"):
+			var component = load("res://globals/component.gd").new()
+			node.add_child(component)
+			node.set_meta("component", component)
+			
+		node.get_meta("component").init()
+		node.get_meta("component").entity = node
+
+	print("AAAAAAAAAAAAAAAAAA")
+	
+	
+	
+	
+	
+	
 	get_node("/root").move_child(p_scene, 0)
 
 	# Loading a save game must set the scene but not run events

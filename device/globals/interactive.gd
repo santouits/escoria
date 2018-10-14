@@ -1,5 +1,10 @@
 extends Node
+
+# interactive.gd
+
 export(Script) var animations
+
+onready var component = preload("res://globals/component.gd").new()
 
 var terrain
 var walk_path
@@ -154,6 +159,9 @@ func _find_sprites(p = null):
 		_find_sprites(p.get_child(i))
 
 func _ready():
+	add_child(component)
+	component.init()
+	
 	if has_node("../terrain"):
 		terrain = get_node("../terrain")
 
