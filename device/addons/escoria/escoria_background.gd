@@ -1,6 +1,5 @@
 extends Sprite
 
-var component = load("res://custom_nodes/component.gd").new()
 export var tooltip = ""
 export(String, FILE, ".esc") var events_path = ""
 export var global_id = ""
@@ -56,8 +55,6 @@ func _enter_tree():
 	add_child(area)
 
 func _ready():
-	add_child(component)
-	component.init()
 	area.connect("input_event", self, "input")
 	add_to_group("background")
 

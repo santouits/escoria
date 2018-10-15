@@ -3,3 +3,6 @@ say player enter_first_trigger:"I entered the first trigger"
 
 :exit
 say player trigger_first_trigger:"I exited the first trigger"
+
+:stopped_inside_actionAAA
+say player "I stopped inside the area of the first trigger"

@@ -1,4 +1,7 @@
 extends Node
+
+# interactive.gd
+
 export(Script) var animations
 
 var terrain
